@@ -1,0 +1,61 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: var(--second-background-color);
+  box-shadow: 1px 1px 2px 0px rgba(27, 31, 35, 0.2);
+  border: 1px solid rgba(100, 100, 100, 0.2);
+  border-radius: 4px;
+  transition: background-color 250ms ease-in-out, box-shadow 250ms ease-in-out;
+}
+
+.item:hover {
+  background-color: var(--accent-color);
+  border: 1px solid rgba(100, 100, 100, 0.3);
+  box-shadow: 1px 1px 1px 0px rgba(27, 31, 35, 0.1);
+}
+
+.paragraph {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  height: 25px;
+  font-size: 14px;
+  background-color: var(--delete-button-color);
+  border: 1px solid var(--input-boarder-color);
+  border-radius: 4px;
+  box-shadow: rgba(27, 31, 35, 0.24) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 250ms ease-in-out 150ms;
+}
+
+.item:hover > .button {
+  opacity: 1;
+}
+
+.button:hover {
+  background-color: var(--delete-button-hover);
+  text-decoration: none;
+  transition-duration: 0.25s;
+}
+
+.button:active {
+  background-color: var(--delete-button-active);
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button:focus {
+  background-color: var(--delete-button-hover);
+  outline: 1px transparent;
+  transition-duration: 0.25s;
+  opacity: 1;
+}
