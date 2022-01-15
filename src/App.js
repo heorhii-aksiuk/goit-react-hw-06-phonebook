@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Contacts from './components/Contacts/Contacts';
 import Form from './components/Form/Form';
 import Section from './components/Section/Section';
 import Filter from './components/Filter/Filter';
 
 export default function App() {
+  const contacts2 = useSelector(state => state.contacts.items);
+
+  console.log(contacts2);
+
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
 
