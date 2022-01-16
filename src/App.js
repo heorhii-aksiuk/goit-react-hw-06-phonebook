@@ -1,39 +1,31 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from './store/contacts/contacts-actions';
 import Contacts from './components/Contacts/Contacts';
 import Form from './components/Form/Form';
 import Section from './components/Section/Section';
 import Filter from './components/Filter/Filter';
 
 export default function App() {
-  const contacts2 = useSelector(state => state.contacts.items);
-
-  console.log(contacts2);
-
-  const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    const contacts = JSON.parse(localStorage.getItem('contacts'));
-    if (contacts) {
-      setContacts(contacts);
-    }
-  }, []);
+  const contacts = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  function addContact(newContact) {
+    dispatch(actions.addContact(newContact));
+  }
+
+  function deleteContact(id) {
+    dispatch(actions.deleteContact(id));
+  }
 
   function getNewContact(newContact) {
     if (contacts.find(contact => contact.name === newContact.name)) {
       alert(`${newContact.name} is already in contacts.`);
     } else {
-      setContacts([newContact, ...contacts]);
+      addContact(newContact);
     }
-  }
-
-  function removeContact(id) {
-    setContacts([...contacts].filter(contact => contact.id !== id));
   }
 
   function handleFilter(e) {
@@ -56,7 +48,7 @@ export default function App() {
             <Filter value={filter} onChange={handleFilter} />
             <Contacts
               contacts={filteredContacts}
-              onRemoveClick={removeContact}
+              onRemoveClick={deleteContact}
             />
           </>
         ) : (
@@ -66,3 +58,15 @@ export default function App() {
     </>
   );
 }
+
+//localStorage without Redux
+/*   useEffect(() => {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    if (contacts) {
+      setContacts(contacts);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]); */
