@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from './store/contacts/contacts-actions';
 import Contacts from './components/Contacts/Contacts';
@@ -7,17 +6,20 @@ import Section from './components/Section/Section';
 import Filter from './components/Filter/Filter';
 
 export default function App() {
-  const [filter, setFilter] = useState('');
-
   const contacts = useSelector(state => state.contacts.items);
+  const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
 
-  function addContact(newContact) {
-    dispatch(actions.addContact(newContact));
+  function addContact(contact) {
+    dispatch(actions.addContact(contact));
   }
 
   function deleteContact(id) {
     dispatch(actions.deleteContact(id));
+  }
+
+  function setFilter(value) {
+    dispatch(actions.setFilter(value));
   }
 
   function getNewContact(newContact) {
@@ -58,15 +60,3 @@ export default function App() {
     </>
   );
 }
-
-//localStorage without Redux
-/*   useEffect(() => {
-    const contacts = JSON.parse(localStorage.getItem('contacts'));
-    if (contacts) {
-      setContacts(contacts);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]); */
