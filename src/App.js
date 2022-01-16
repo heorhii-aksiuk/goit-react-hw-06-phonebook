@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from './store/contacts/contacts-actions';
+import { actions } from './store/contacts/slice';
 import Contacts from './components/Contacts/Contacts';
 import Form from './components/Form/Form';
 import Section from './components/Section/Section';
