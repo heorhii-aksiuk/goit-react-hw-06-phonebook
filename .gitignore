@@ -118,6 +118,9 @@ dist
 # husky
 /.husky
 
+#vscode sattings
+/.vscode
+
 # misc
 .DS_Store
 .env.local
