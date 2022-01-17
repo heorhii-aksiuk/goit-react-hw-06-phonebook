@@ -9,17 +9,8 @@ export default function Form({ onSubmitContact }) {
 
   function handleChange(e) {
     const { name, value } = e.target;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        return;
-    }
+    if (name === 'name') setName(value);
+    if (name === 'number') setNumber(value);
   }
 
   function handleSubmit(e) {
