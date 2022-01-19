@@ -10,28 +10,16 @@ export default function App() {
   const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
 
-  function addContact(contact) {
-    dispatch(actions.addContact(contact));
-  }
-
-  function deleteContact(id) {
-    dispatch(actions.deleteContact(id));
-  }
-
-  function setFilter(value) {
-    dispatch(actions.setFilter(value));
-  }
-
   function getNewContact(newContact) {
     if (contacts.find(contact => contact.name === newContact.name)) {
       alert(`${newContact.name} is already in contacts.`);
     } else {
-      addContact(newContact);
+      dispatch(actions.addContact(newContact));
     }
   }
 
   function handleFilter(e) {
-    setFilter(e.target.value);
+    dispatch(actions.setFilter(e.target.value));
   }
 
   const normalizeFilter = filter.toLowerCase();
@@ -50,7 +38,7 @@ export default function App() {
             <Filter value={filter} onChange={handleFilter} />
             <Contacts
               contacts={filteredContacts}
-              onRemoveClick={deleteContact}
+              onRemoveClick={id => dispatch(actions.deleteContact(id))}
             />
           </>
         ) : (
